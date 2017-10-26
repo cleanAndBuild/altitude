@@ -22,16 +22,19 @@ class ViewController: UIViewController,MKMapViewDelegate {
         let ud = UserDefaults.standard
         
         //経緯度を読み込む
-        let lat = ud.double(forKey: "LAT")
-        let lon = ud.double(forKey: "LON")
-        
+		var lat = ud.double(forKey: "LAT")
+		var lon = ud.double(forKey: "LON")
+
+		if(lat <= 1.0 && lat >= -1.0) {lat = 35.0}
+		if(lon <= 1.0 && lon >= -1.0) {lon = 139.0}
+
         //CLLocationCoordinate2Dに変換
         let coordinte = CLLocationCoordinate2DMake(lat,lon)
         
         //表示範囲を読み込む
         let latDelta = ud.double(forKey: "LAT_DELTA")
         let lonDelta = ud.double(forKey: "LON_DELTA")
-        
+		
         //MKCoordinateSpanに変換
         let span = MKCoordinateSpanMake(latDelta, lonDelta)
         
